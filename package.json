@@ -1,6 +1,6 @@
 {
   "name": "generate-feature",
-  "publisher": "youssef",
+  "publisher": "YoussefCodez",
   "displayName": "Generate Feature",
   "description": "Generate feature-based Clean Architecture folder structures (data / domain / presentation) with customizable layers and Flutter boilerplate support.",
   "version": "1.0.0",
