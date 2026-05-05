@@ -1,63 +1,51 @@
 # Generate Feature 🏗️
 
-A VS Code extension that generates **feature-based Clean Architecture** folder structures with customizable layers and optional Flutter boilerplate files.
+A VS Code extension that generates **feature-based Clean Architecture** folder structures for Flutter and other projects. It creates a standardized directory structure and a starter screen file automatically.
 
-> Speed up your project scaffolding — stop creating the same folders and files manually for every new feature.
+> Speed up your project scaffolding — stop creating the same folders manually for every new feature.
 
 ## ✨ Features
 
 | Feature | Description |
 |---|---|
-| **Feature scaffolding** | Creates `data / domain / presentation` folders under `lib/features/{name}/` |
-| **Custom layers** | Add any extra layers (e.g. `core`, `shared`) on the fly |
-| **Explorer context menu** | Right-click any folder → *Generate Feature Structure* |
-| **Duplicate detection** | Warns you if a feature already exists instead of overwriting |
+| **Clean Scaffolding** | Creates `data`, `domain`, and `presentation` tiers under `lib/features/{name}/` |
+| **Custom Layers** | Add any extra layers (e.g. `core`, `shared`) on the fly during generation |
+| **Modern Structure** | Uses `screens` and `view_model` patterns for the presentation layer |
+| **Explorer Context Menu** | Right-click any folder → *Generate Feature Structure* |
+| **Settings Configurable** | Customize default layers and base path in VS Code settings |
 
 ## 🚀 Usage
 
-### Via Command Palette
+### 1. Via Command Palette
+- Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
+- Type **"Generate Feature Structure"**
+- Enter feature name (e.g. `auth`, `profile`, `cart`)
+- Select layers to generate (multi-select)
+- Done! 🎉
 
-1. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
-2. Type **"Generate Feature Structure"**
-3. Enter a feature name (e.g. `auth`, `profile`, `cart`)
-4. Select which layers to generate (multi-select)
-5. Done! 🎉
-
-### Via Explorer Context Menu
-
-1. Right-click on any folder in the Explorer
-2. Click **"Generate Feature Structure"**
-3. Follow the same flow
+### 2. Via Explorer Context Menu
+- Right-click on any folder in the Explorer
+- Click **"Generate Feature Structure"**
 
 ## 📁 Generated Structure
 
-For a feature named `auth` with default layers:
+For a feature named `auth`, the extension generates:
 
 ```
 lib/features/auth/
 ├── data/
 │   ├── datasources/
-│   │   ├── auth_remote_data_source.dart
-│   │   └── auth_local_data_source.dart
 │   ├── models/
-│   │   └── auth_model.dart
 │   └── repositories/
-│       └── auth_repository_impl.dart
 ├── domain/
 │   ├── entities/
-│   │   └── auth_entity.dart
 │   ├── repositories/
-│   │   └── auth_repository.dart
 │   └── usecases/
-│       └── get_auth.dart
 └── presentation/
-    ├── bloc/
-    │   ├── auth_bloc.dart
-    │   ├── auth_event.dart
-    │   └── auth_state.dart
-    ├── pages/
-    │   └── auth_page.dart
-    └── widgets/
+    ├── view_model/
+    └── screens/
+        ├── widgets/
+        └── auth_screen.dart (empty file)
 ```
 
 ## ⚙️ Settings
@@ -66,48 +54,17 @@ Configure via VS Code Settings (`Ctrl+,`) → search for **"Generate Feature"**:
 
 | Setting | Default | Description |
 |---|---|---|
-| `generateFeature.defaultLayers` | `["data", "domain", "presentation"]` | Layers shown in the picker |
-| `generateFeature.basePath` | `lib/features` | Where features are created (relative to workspace root) |
-| `generateFeature.generateBoilerplate` | `true` | Generate starter files inside each layer |
-| `generateFeature.customTemplates` | `[]` | Override built-in templates per layer |
-
-### Custom Templates Example
-
-```jsonc
-"generateFeature.customTemplates": [
-  {
-    "layer": "domain",
-    "files": [
-      {
-        "relativePath": "entities/{{feature_name}}_entity.dart",
-        "content": "// Custom entity for {{FeatureName}}\nclass {{FeatureName}}Entity {}"
-      }
-    ]
-  }
-]
-```
+| `generateFeature.defaultLayers` | `["data", "domain", "presentation"]` | Default layer checklist |
+| `generateFeature.basePath` | `lib/features` | Root directory for new features |
+| `generateFeature.generateBoilerplate` | `true` | Set to `false` to skip generating subfolders/files |
 
 ## 🏛️ Extension Architecture
 
-The extension itself follows Clean Architecture principles:
-
-```
-src/
-├── extension.ts              # Entry point — registers commands
-├── commands/
-│   └── addFeature.ts         # Command handler — orchestrates the flow
-├── services/
-│   └── featureGenerator.ts   # Service — file system operations (vscode.workspace.fs)
-├── ui/
-│   └── prompts.ts            # UI — input boxes & quick picks
-├── config/
-│   ├── defaults.ts           # Default layers & Flutter templates
-│   └── configService.ts      # Reads VS Code settings
-├── utils/
-│   └── stringUtils.ts        # String utilities (snake_case, PascalCase, validation)
-└── types/
-    └── index.ts              # Shared TypeScript interfaces
-```
+The extension is built using Clean Architecture:
+- **UI Layer**: Prompts and Quick Picks
+- **Command Layer**: VS Code entry points and orchestration
+- **Service Layer**: File system operations using `vscode.workspace.fs`
+- **Config**: Settings management
 
 ## 📝 License
 
